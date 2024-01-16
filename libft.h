@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2023/11/15 15:20:48 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:02:04 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,23 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <limits.h>
+# include <string.h>
 
+/** GNL Buffer */
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+
+/** libft struct */
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
 
+/** libft definitions */
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -67,5 +77,22 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/** GNL definitions */
+void	*ft_realloc(void *p, size_t p_len, size_t size);
+char	*get_next_line(int fd);
+
+
+/** ft_printf definitions */
+int		ft_printf(const char *format, ...);
+int		iter_format(const char *f, va_list args, size_t i, size_t l);
+int		ft_putchar(char c);
+int		ft_putstr(char *s);
+int		print_nb(int dec);
+int		print_positive_nb(unsigned int dec);
+int		print_prefixed_hexa(unsigned long long dec);
+int		print_hexa(unsigned int dec, int upper);
+int		count_chars(unsigned long long dec, int b_len);
+void	print_positive_base(unsigned long long dec, char *base, int b_len);
 
 #endif

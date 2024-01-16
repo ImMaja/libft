@@ -1,80 +1,81 @@
 NAME = libft.a
-CC = cc
+CC = clang
 FLAGS = -Wall -Werror -Wextra
 
-SRCS = ft_isalpha.c \
-		ft_isdigit.c \
-		ft_isalnum.c \
-		ft_isascii.c \
-		ft_isprint.c \
-		ft_strlen.c \
-		ft_memset.c \
-		ft_bzero.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_strlcpy.c \
-		ft_strlcat.c \
-		ft_toupper.c \
-		ft_tolower.c \
-		ft_strchr.c \
-		ft_strrchr.c \
-		ft_strncmp.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_strnstr.c \
-		ft_atoi.c \
-		ft_calloc.c \
-		ft_strdup.c \
-		ft_substr.c \
-		ft_strjoin.c \
-		ft_strtrim.c \
-		ft_split.c \
-		ft_itoa.c \
-		ft_strmapi.c \
-		ft_striteri.c \
-		ft_putchar_fd.c \
-		ft_putstr_fd.c \
-		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
+OBJS_DIR = objs/
 
-SRCS_BONUS = ft_lstadd_back_bonus.c \
-				ft_lstadd_front_bonus.c \
-				ft_lstclear_bonus.c \
-				ft_lstdelone_bonus.c \
-				ft_lstiter_bonus.c \
-				ft_lstlast_bonus.c \
-				ft_lstmap_bonus.c \
-				ft_lstnew_bonus.c \
-				ft_lstsize_bonus.c \
+LIBFT_SRCS = libft_srcs/ft_isalpha.c \
+			libft_srcs/ft_isdigit.c \
+			libft_srcs/ft_isalnum.c \
+			libft_srcs/ft_isascii.c \
+			libft_srcs/ft_isprint.c \
+			libft_srcs/ft_strlen.c \
+			libft_srcs/ft_memset.c \
+			libft_srcs/ft_bzero.c \
+			libft_srcs/ft_memcpy.c \
+			libft_srcs/ft_memmove.c \
+			libft_srcs/ft_strlcpy.c \
+			libft_srcs/ft_strlcat.c \
+			libft_srcs/ft_toupper.c \
+			libft_srcs/ft_tolower.c \
+			libft_srcs/ft_strchr.c \
+			libft_srcs/ft_strrchr.c \
+			libft_srcs/ft_strncmp.c \
+			libft_srcs/ft_memchr.c \
+			libft_srcs/ft_memcmp.c \
+			libft_srcs/ft_strnstr.c \
+			libft_srcs/ft_atoi.c \
+			libft_srcs/ft_calloc.c \
+			libft_srcs/ft_strdup.c \
+			libft_srcs/ft_substr.c \
+			libft_srcs/ft_strjoin.c \
+			libft_srcs/ft_strtrim.c \
+			libft_srcs/ft_split.c \
+			libft_srcs/ft_itoa.c \
+			libft_srcs/ft_strmapi.c \
+			libft_srcs/ft_striteri.c \
+			libft_srcs/ft_putchar_fd.c \
+			libft_srcs/ft_putstr_fd.c \
+			libft_srcs/ft_putendl_fd.c \
+			libft_srcs/ft_putnbr_fd.c \
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-OBJS = $(SRCS:.c=.o)
+GNL_SRCS = gnl_srcs/get_next_line.c \
+        	gnl_srcs/get_next_line_utils.c
 
-%.o : %.c
+PRINTF_SRCS = ft_printf_srcs/ft_printf.c \
+            	ft_printf_srcs/base_utils.c \
+            	ft_printf_srcs/print_functions.c \
+            	ft_printf_srcs/print_functions2.c
+
+LIBFT_OBJS = $(patsubst libft_srcs/%.c,$(OBJS_DIR)%.o,$(LIBFT_SRCS))
+GNL_OBJS = $(patsubst gnl_srcs/%.c,$(OBJS_DIR)%.o,$(GNL_SRCS))
+PRINTF_OBJS = $(patsubst ft_printf_srcs/%.c,$(OBJS_DIR)%.o,$(PRINTF_SRCS))
+
+OBJS = $(LIBFT_OBJS) $(GNL_OBJS) $(PRINTF_OBJS)
+
+$(OBJS_DIR)%.o : libft_srcs/%.c | $(OBJS_DIR)
+	$(CC) $(FLAGS) -o $@ -c $<
+
+$(OBJS_DIR)%.o : gnl_srcs/%.c | $(OBJS_DIR)
+	$(CC) $(FLAGS) -o $@ -c $<
+
+$(OBJS_DIR)%.o : ft_printf_srcs/%.c | $(OBJS_DIR)
 	$(CC) $(FLAGS) -o $@ -c $<
 
 $(NAME) : $(OBJS)
 	ar rcs $(NAME) $(OBJS)
-	ranlib $(NAME)
 
-.PHONY: bonus
-bonus : $(OBJS_BONUS)
-	ar rcs $(NAME) $(OBJS_BONUS)
-	ranlib $(NAME)
-
-a.out : $(OBJS_BONUS)
-	 $(CC) $(FLAGS) -o $@ $^
+$(OBJS_DIR) :
+	mkdir -p $(OBJS_DIR)
 
 all : $(NAME)
 
-.PHONY: clean
 clean :
-	rm -f *.o
+	rm -rf $(OBJS_DIR)
 
-.PHONY: fclean
 fclean : clean
 	rm -f $(NAME)
-	rm -f a.out
 
-.PHONY: re
 re : fclean all
+
+.PHONY: all clean fclean re
