@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 13:13:40 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 11:51:44 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:12:52 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,14 @@ static	char	**calc(char const *s, char c, char **arr)
 	curr_str = 0;
 	while (*(s + i) != '\0')
 	{
+		while (*(s + i) == c)
+			i++;
 		if (*(s + i) != '\0')
 		{
 			j = 0;
 			arr[curr_str] = malloc(sizeof(char) * count_str_len(s + i, c) + 1);
 			if (arr[curr_str] == 0)
-			{
-				free_all_str(arr, curr_str);
-				return (NULL);
-			}
+				return (free_all_str(arr, curr_str), NULL);
 			while (*(s + i) != c && *(s + i) != '\0')
 				arr[curr_str][j++] = *(s + i++);
 			arr[curr_str][j] = '\0';
@@ -99,7 +98,5 @@ char	**ft_split(char const *s, char c)
 	arr = (char **) malloc(sizeof(char *) * (count_strs(s, c) + 1));
 	if (arr == 0)
 		return (0);
-	while (*(s) == c)
-			s++;
 	return (calc(s, c, arr));
 }

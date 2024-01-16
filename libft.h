@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 12:02:04 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:13:04 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 /** GNL definitions */
 void	*ft_realloc(void *p, size_t p_len, size_t size);
 char	*get_next_line(int fd);
-
 
 /** ft_printf definitions */
 int		ft_printf(const char *format, ...);

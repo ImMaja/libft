@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:29:33 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 13:17:50 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:13:21 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static char	*at_eol(size_t *buff_index, size_t *i, char *s)
 	*buff_index = *buff_index + 1;
 	return (s);
 }
+
 static char	*read_buffer(int fd, char *s, size_t buff_iter)
 {
 	static void		*buffer[BUFFER_SIZE];
