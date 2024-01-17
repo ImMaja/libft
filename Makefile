@@ -38,6 +38,8 @@ LIBFT_SRCS = libft_srcs/ft_isalpha.c \
 			libft_srcs/ft_putstr_fd.c \
 			libft_srcs/ft_putendl_fd.c \
 			libft_srcs/ft_putnbr_fd.c \
+			libft_srcs/ft_realloc.c \
+			libft_srcs/ft_memcpy_opti_af.c \
 
 GNL_SRCS = gnl_srcs/get_next_line.c \
         	gnl_srcs/get_next_line_utils.c

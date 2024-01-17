@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 14:13:04 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/01/17 08:44:11 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-/** GNL definitions */
+/** Fonctions que j'ai ajoute a la libft */
 void	*ft_realloc(void *p, size_t p_len, size_t size);
+void	ft_memcpy_opti_af(void *dest, const void *src, size_t n);
+
+/** GNL definitions */
 char	*get_next_line(int fd);
 
 /** ft_printf definitions */

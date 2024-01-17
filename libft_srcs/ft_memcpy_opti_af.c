@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_memcpy_opti_af.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 14:29:29 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 13:18:44 by gpeiffer         ###   ########.fr       */
+/*   Created: 2024/01/17 08:37:13 by gpeiffer          #+#    #+#             */
+/*   Updated: 2024/01/17 08:43:48 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static void	ft_memcpy_opti_af(void *dest, const void *src, size_t n)
+// C'est un memcpy classique, sauf que je cast en long long (8 octets)
+// -> donc 8 fois moins d'itérations, donc c'est un peu plus rapide.
+// A la base j'avais code cette fonction pour ne pas timeout 
+// sur GNL, mais c'est pratique donc c'est la.
+void	ft_memcpy_opti_af(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
@@ -29,21 +33,4 @@ static void	ft_memcpy_opti_af(void *dest, const void *src, size_t n)
 		*((char *)dest + i) = ((const char *)src)[i];
 		i++;
 	}
-}
-
-void	*ft_realloc(void *p, size_t p_len, size_t size)
-{
-	void	*new;
-
-	new = malloc(size);
-	if (new == NULL)
-	{
-		free(p);
-		return (NULL);
-	}
-	if (p == NULL)
-		return (new);
-	ft_memcpy_opti_af(new, p, p_len);
-	free(p);
-	return (new);
 }
