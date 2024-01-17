@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:48:23 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 13:15:58 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/01/17 08:19:30 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
+	int		len;
 
 	va_start(args, format);
-	return (iter_format(format, args, 0, 0));
+	len = iter_format(format, args, 0, 0);
+	va_end(args);
+	return (len);
 }
 
 int	iter_format(const char *f, va_list args, size_t i, size_t l)
