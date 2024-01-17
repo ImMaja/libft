@@ -42,7 +42,6 @@ LIBFT_SRCS = libft_srcs/ft_isalpha.c \
 			libft_srcs/ft_memcpy_opti_af.c \
 
 GNL_SRCS = gnl_srcs/get_next_line.c \
-        	gnl_srcs/get_next_line_utils.c
 
 PRINTF_SRCS = ft_printf_srcs/ft_printf.c \
             	ft_printf_srcs/base_utils.c \
