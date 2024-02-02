@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:32:15 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 13:15:29 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:21:20 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	count_chars(unsigned long long dec, int b_len)
 }
 
 void	print_positive_base(unsigned long long dec, char *base, int b_len)
-{	
+{
 	if (dec >= (unsigned long long)b_len)
 	{
 		print_positive_base(dec / b_len, base, b_len);

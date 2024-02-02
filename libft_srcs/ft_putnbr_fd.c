@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:07:28 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 11:31:05 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:21:39 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putnbr_fd(int n, int fd)
 	{
 		write_fd('-', fd);
 		nb *= -1;
-	}		
+	}
 	if (nb >= 10)
 	{
 		ft_putnbr_fd(nb / 10, fd);
