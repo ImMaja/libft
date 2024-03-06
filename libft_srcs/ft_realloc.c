@@ -6,28 +6,30 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:35:25 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/19 07:34:11 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:40:46 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-// Cette fonction NE REALLOUE PAS de la memoire au pointer,
-// Elle renvoie un NOUVEAU pointer de la taille de size
-// et copie le contenue de p vers new.
-void	*ft_realloc(void *p, size_t p_len, size_t size)
+void	*ft_realloc(void *ptr,
+			size_t ptr_size,
+			size_t new_ptr_size)
 {
-	void	*new;
+	void	*new_ptr;
 
-	new = malloc(size);
-	if (new == NULL)
+	new_ptr = malloc(new_ptr_size);
+	if (new_ptr == NULL)
 	{
-		free(p);
+		if (ptr != NULL)
+			free(ptr);
 		return (NULL);
 	}
-	if (p == NULL)
-		return (new);
-	ft_memcpy_opti_af(new, p, p_len);
-	free(p);
-	return (new);
+	if (ptr == NULL)
+		return (new_ptr);
+	if (ptr_size > new_ptr_size)
+		ft_memcpy_opti_af(new_ptr, ptr, new_ptr_size);
+	else
+		ft_memcpy_opti_af(new_ptr, ptr, ptr_size);
+	return (free(ptr), new_ptr);
 }

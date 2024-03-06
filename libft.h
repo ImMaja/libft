@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/17 08:44:11 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:43:04 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,25 @@
 # include <stdarg.h>
 # include <limits.h>
 # include <string.h>
+# include <stdbool.h>
 
 /** GNL Buffer */
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 100U
 # endif
+
+/** get_next_line structs */
+typedef struct s_buffer
+{
+	void	*buffer[BUFFER_SIZE];
+	size_t	buffer_iter;
+}	t_buffer;
+
+typedef struct s_line
+{
+	void	*line;
+	size_t	line_iter;
+}	t_line;
 
 /** libft struct */
 typedef struct s_list

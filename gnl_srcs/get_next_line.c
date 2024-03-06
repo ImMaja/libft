@@ -6,83 +6,103 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:29:33 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 14:13:21 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:43:40 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static ssize_t	fill_buffer(int fd, void *buffer, size_t buff_index)
+static void	realloc_line(t_line *line,
+			size_t line_size,
+			size_t new_line_size)
+{
+	line->line = ft_realloc(line->line,
+			sizeof(char) * line_size,
+			sizeof(char) * new_line_size);
+}
+
+static bool	fill_line(t_line *line,
+				t_buffer *buffer)
+{
+	while (buffer->buffer_iter < BUFFER_SIZE)
+	{
+		*((char *) line->line + line->line_iter)
+			= *((char *) buffer->buffer + buffer->buffer_iter);
+		if (*((char *) buffer->buffer + buffer->buffer_iter) == '\n')
+		{
+			buffer->buffer_iter++;
+			return (true);
+		}
+		if (*((char *) buffer->buffer + buffer->buffer_iter) == '\0')
+		{
+			buffer->buffer_iter = 0;
+			return (true);
+		}
+		buffer->buffer_iter++;
+		line->line_iter++;
+	}
+	return (false);
+}
+
+static ssize_t	fill_buffer(int fd,
+					t_buffer *buffer,
+					t_line *line,
+					size_t *refill)
 {
 	ssize_t	read_status;
 
-	if (buff_index != 0)
-		return (BUFFER_SIZE + 1);
-	read_status = read(fd, buffer, BUFFER_SIZE);
-	if (read_status == BUFFER_SIZE || read_status < 0)
-		return (read_status);
-	*((char *)buffer + read_status) = '\0';
+	read_status = 1;
+	if (buffer->buffer_iter == 0 || buffer->buffer_iter == BUFFER_SIZE)
+	{
+		buffer->buffer_iter = 0;
+		read_status = read(fd, buffer->buffer, BUFFER_SIZE);
+		if (read_status == -1)
+		{
+			ft_bzero(buffer->buffer, BUFFER_SIZE);
+			if (line->line != NULL)
+				free(line->line);
+		}
+		else
+		{
+			*((char *) buffer->buffer + read_status) = '\0';
+			(*refill)++;
+		}
+	}
 	return (read_status);
 }
 
-static char	*at_eof(size_t *buff_index, size_t *i, char *s)
+static char	*return_line(t_line *line,
+				size_t refill)
 {
-	if (*i == 0)
-	{
-		free(s);
+	if (*((char *) line->line) == '\0')
+		return (free(line->line), NULL);
+	realloc_line(line, (refill + 1) * BUFFER_SIZE, line->line_iter + 2);
+	if (line->line == NULL)
 		return (NULL);
-	}
-	s = (char *)ft_realloc(s, *i, *i + 1);
-	*(s + *i) = '\0';
-	*buff_index = 0;
-	*i = 0;
-	return (s);
-}
-
-static char	*at_eol(size_t *buff_index, size_t *i, char *s)
-{
-	s = (char *)ft_realloc(s, *i, *i + 2);
-	*(s + *i) = '\n';
-	*(s + *i + 1) = '\0';
-	*i = 0;
-	*buff_index = *buff_index + 1;
-	return (s);
-}
-
-static char	*read_buffer(int fd, char *s, size_t buff_iter)
-{
-	static void		*buffer[BUFFER_SIZE];
-	static size_t	buff_index;
-	static size_t	i;
-
-	if (fill_buffer(fd, buffer, buff_index) < 0)
-	{
-		free(s);
-		return (NULL);
-	}
-	if (*((char *)buffer) == '\0' && buff_iter == 0)
-		return (NULL);
-	s = (char *)ft_realloc(s, i, BUFFER_SIZE * (buff_iter + 1));
-	while (buff_index != BUFFER_SIZE)
-	{
-		if (*((char *)buffer + buff_index) == '\n')
-			return (at_eol(&buff_index, &i, s));
-		if (*((char *)buffer + buff_index) == '\0')
-			return (at_eof(&buff_index, &i, s));
-		*(s + i) = *((char *)buffer + buff_index);
-		buff_index++;
-		i++;
-	}
-	buff_index = 0;
-	return (read_buffer(fd, s, ++buff_iter));
+	*((char *) line->line + line->line_iter + 1) = '\0';
+	return ((char *) line->line);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*s_line;
+	static t_buffer	buffer;
+	t_line			line;
+	size_t			refill;
 
-	if (BUFFER_SIZE == 0)
+	if (fd < 0 || fd > 1023)
 		return (NULL);
-	s_line = NULL;
-	return (read_buffer(fd, s_line, 0));
+	line.line = NULL;
+	line.line_iter = 0;
+	refill = 0;
+	while (1)
+	{
+		if (fill_buffer(fd, &buffer, &line, &refill) == -1)
+			return (NULL);
+		realloc_line(&line, refill * BUFFER_SIZE, (refill + 1) * BUFFER_SIZE);
+		if (line.line == NULL)
+			return (NULL);
+		if (fill_line(&line, &buffer))
+			return (return_line(&line, refill));
+	}
+	return (NULL);
 }
