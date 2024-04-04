@@ -40,13 +40,17 @@ LIBFT_SRCS = libft_srcs/ft_isalpha.c \
 			libft_srcs/ft_putnbr_fd.c \
 			libft_srcs/ft_realloc.c \
 			libft_srcs/ft_memcpy_opti_af.c \
+			libft_srcs/ft_realloc_array.c \
+			libft_srcs/ft_free_array.c \
+			libft_srcs/ft_free_array_of_array.c \
+			libft_srcs/ft_get_array_length.c \
 
 GNL_SRCS = gnl_srcs/get_next_line.c \
 
 PRINTF_SRCS = ft_printf_srcs/ft_printf.c \
-            	ft_printf_srcs/base_utils.c \
-            	ft_printf_srcs/print_functions.c \
-            	ft_printf_srcs/print_functions2.c
+			ft_printf_srcs/base_utils.c \
+			ft_printf_srcs/print_functions.c \
+			ft_printf_srcs/print_functions2.c
 
 LIBFT_OBJS = $(patsubst libft_srcs/%.c,$(OBJS_DIR)%.o,$(LIBFT_SRCS))
 GNL_OBJS = $(patsubst gnl_srcs/%.c,$(OBJS_DIR)%.o,$(GNL_SRCS))
