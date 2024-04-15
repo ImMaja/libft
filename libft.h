@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/04/04 09:02:05 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:15:35 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,9 +188,9 @@ void	**ft_realloc_array(void **arr_ptr,
 			size_t arr_ptr_size,
 			size_t new_arr_ptr_size);
 
-void	free_array(void **array);
+void	ft_free_array(void **array);
 
-void	free_array_of_array(void ***array);
+void	ft_free_array_of_array(void ***array);
 
 size_t	ft_get_array_length(void **array);
 
