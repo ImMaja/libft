@@ -6,7 +6,7 @@
 /*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:36:39 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 11:31:05 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:37:55 by gpeiffer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start >= ft_strlen(s))
 	{
 		s2 = (char *) malloc(sizeof(char) * 1);
+		if (s2 == NULL)
+			return (NULL);
 		*(s2) = '\0';
 		return (s2);
 	}
