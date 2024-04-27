@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_functions2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:50:22 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/01/16 13:15:42 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:15:09 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ int	print_hexa(unsigned int dec, int upper)
 	len = 0;
 	if (dec == 0)
 		return (ft_putchar('0'));
-	if (dec < 0)
-	{
-		ft_putchar('-');
-		dec = dec * -1;
-		len += 1;
-	}
 	len += count_chars(dec, 16);
 	print_positive_base(dec, h, 16);
 	return (len);

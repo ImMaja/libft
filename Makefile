@@ -1,5 +1,5 @@
 NAME = libft.a
-CC = clang
+CC = cc
 FLAGS = -Wall -Werror -Wextra
 
 OBJS_DIR = objs/
