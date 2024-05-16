@@ -6,7 +6,7 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:29:33 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/05/13 16:17:53 by maja             ###   ########.fr       */
+/*   Updated: 2024/05/16 13:40:40 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > 1023)
 		return (NULL);
+	if (fd == 0)
+		buffer.buffer_iter = 0;
 	line.line = NULL;
 	line.line_iter = 0;
 	refill = 0;

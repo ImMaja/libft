@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpeiffer <gpeiffer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/04/15 13:15:35 by gpeiffer         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:35:49 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 /** get_next_line structs */
 typedef struct s_buffer
 {
-	void	*buffer[BUFFER_SIZE];
+	char	buffer[BUFFER_SIZE];
 	size_t	buffer_iter;
 }	t_buffer;
 
