@@ -6,7 +6,7 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:29:33 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/05/16 13:40:40 by maja             ###   ########.fr       */
+/*   Updated: 2024/05/16 17:27:34 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	realloc_line(t_line *line,
 			size_t line_size,
 			size_t new_line_size)
 {
-	line->line = ft_realloc(line->line,
+	line->line = (char *) ft_realloc((void *) line->line,
 			sizeof(char) * line_size,
 			sizeof(char) * new_line_size);
 }
@@ -24,21 +24,20 @@ static void	realloc_line(t_line *line,
 static bool	fill_line(t_line *line,
 				t_buffer *buffer)
 {
-	while (buffer->buffer_iter < BUFFER_SIZE)
+	while (buffer->buf_iter < BUFFER_SIZE)
 	{
-		*((char *) line->line + line->line_iter)
-			= *((char *) buffer->buffer + buffer->buffer_iter);
-		if (*((char *) buffer->buffer + buffer->buffer_iter) == '\n')
+		*(line->line + line->line_iter) = *(buffer->buffer + buffer->buf_iter);
+		if (*(buffer->buffer + buffer->buf_iter) == '\n')
 		{
-			buffer->buffer_iter++;
+			buffer->buf_iter++;
 			return (true);
 		}
-		if (*((char *) buffer->buffer + buffer->buffer_iter) == '\0')
+		if (*(buffer->buffer + buffer->buf_iter) == '\0')
 		{
-			buffer->buffer_iter = 0;
+			buffer->buf_iter = 0;
 			return (true);
 		}
-		buffer->buffer_iter++;
+		buffer->buf_iter++;
 		line->line_iter++;
 	}
 	return (false);
@@ -52,19 +51,21 @@ static ssize_t	fill_buffer(int fd,
 	ssize_t	read_status;
 
 	read_status = 1;
-	if (buffer->buffer_iter == 0 || buffer->buffer_iter == BUFFER_SIZE)
+	if (buffer->buf_iter == 0 || buffer->buf_iter == BUFFER_SIZE)
 	{
-		buffer->buffer_iter = 0;
-		read_status = read(fd, buffer->buffer, BUFFER_SIZE);
+		buffer->buf_iter = 0;
+		read_status = read(fd, (void *) buffer->buffer, BUFFER_SIZE);
 		if (read_status == -1)
 		{
-			ft_bzero(buffer->buffer, BUFFER_SIZE);
+			ft_bzero((void *) buffer->buffer, BUFFER_SIZE);
 			if (line->line != NULL)
 				free(line->line);
 		}
+		else if (read_status == 0 && fd == 0)
+			return (-1);
 		else
 		{
-			*((char *) buffer->buffer + read_status) = '\0';
+			*(buffer->buffer + read_status) = '\0';
 			(*refill)++;
 		}
 	}
@@ -74,13 +75,13 @@ static ssize_t	fill_buffer(int fd,
 static char	*return_line(t_line *line,
 				size_t refill)
 {
-	if (*((char *) line->line) == '\0')
+	if (*(line->line) == '\0')
 		return (free(line->line), NULL);
 	realloc_line(line, (refill + 1) * BUFFER_SIZE, line->line_iter + 2);
 	if (line->line == NULL)
 		return (NULL);
-	*((char *) line->line + line->line_iter + 1) = '\0';
-	return ((char *) line->line);
+	*(line->line + line->line_iter + 1) = '\0';
+	return (line->line);
 }
 
 char	*get_next_line(int fd)
@@ -92,7 +93,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || fd > 1023)
 		return (NULL);
 	if (fd == 0)
-		buffer.buffer_iter = 0;
+		buffer.buf_iter = 0;
 	line.line = NULL;
 	line.line_iter = 0;
 	refill = 0;

@@ -6,7 +6,7 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/05/16 13:35:49 by maja             ###   ########.fr       */
+/*   Updated: 2024/05/16 14:06:43 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@
 typedef struct s_buffer
 {
 	char	buffer[BUFFER_SIZE];
-	size_t	buffer_iter;
+	size_t	buf_iter;
 }	t_buffer;
 
 typedef struct s_line
 {
-	void	*line;
+	char	*line;
 	size_t	line_iter;
 }	t_line;
 
