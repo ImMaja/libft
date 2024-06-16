@@ -6,7 +6,7 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:29:33 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/05/16 17:27:34 by maja             ###   ########.fr       */
+/*   Updated: 2024/06/16 16:45:51 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,13 @@ static ssize_t	fill_buffer(int fd,
 	return (read_status);
 }
 
-static char	*return_line(t_line *line,
+static char	*return_line(int fd,
+				t_buffer *buffer,
+				t_line *line,
 				size_t refill)
 {
+	if (fd == 0)
+		buffer->buf_iter = 0;
 	if (*(line->line) == '\0')
 		return (free(line->line), NULL);
 	realloc_line(line, (refill + 1) * BUFFER_SIZE, line->line_iter + 2);
@@ -87,7 +91,7 @@ static char	*return_line(t_line *line,
 char	*get_next_line(int fd)
 {
 	static t_buffer	buffer;
-	t_line			line;
+	t_line			line;	
 	size_t			refill;
 
 	if (fd < 0 || fd > 1023)
@@ -105,7 +109,7 @@ char	*get_next_line(int fd)
 		if (line.line == NULL)
 			return (NULL);
 		if (fill_line(&line, &buffer))
-			return (return_line(&line, refill));
+			return (return_line(fd, &buffer, &line, refill));
 	}
 	return (NULL);
 }
