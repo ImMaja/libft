@@ -10,9 +10,6 @@ GET_NEXT_LINE = get_next_line/
 
 OBJS_DIR = objs/
 
-GREEN=\033[0;32m
-NC=\033[0m
-
 HEADER = libft.h
 
 SRCS = $(SRCS_DIR)$(LIBFT)ft_isalpha.c \
@@ -70,27 +67,20 @@ $(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(HEADER) | $(OBJS_DIR)
 	@echo "Compiling $<"
 
 $(NAME): $(OBJS) $(HEADER)
-	@echo "Creating library $(NAME)"
 	@ar rcs $(NAME) $(OBJS)
-	@echo "$(GREEN)LIBFT COMPILED$(NC)"
 
 $(OBJS_DIR) :
 	@mkdir -p $(OBJS_DIR)$(LIBFT)
-	@echo "Created directory $(OBJS_DIR)$(LIBFT)"
 	@mkdir -p $(OBJS_DIR)$(FT_PRINTF)
-	@echo "Created directory $(OBJS_DIR)$(FT_PRINTF)"
 	@mkdir -p $(OBJS_DIR)$(GET_NEXT_LINE)
-	@echo "Created directory $(OBJS_DIR)$(GET_NEXT_LINE)"
 
 all : $(NAME)
 
 clean :
 	@rm -rf $(OBJS_DIR)
-	@echo "Deleted directory $(OBJS_DIR) and content"
 
 fclean : clean
 	@rm -f $(NAME)
-	@echo "Deleted executable $(NAME)"
 
 re : fclean all
 
