@@ -6,13 +6,16 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:07:28 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/05/13 16:17:53 by maja             ###   ########.fr       */
+/*   Updated: 2024/09/16 00:44:04 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
 
-static	void	write_fd(char c, int fd);
+static	void	write_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -31,9 +34,4 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		write_fd(nb + '0', fd);
-}
-
-static	void	write_fd(char c, int fd)
-{
-	write(fd, &c, 1);
 }

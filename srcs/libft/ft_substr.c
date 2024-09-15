@@ -6,31 +6,11 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 09:36:39 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/05/13 16:17:53 by maja             ###   ########.fr       */
+/*   Updated: 2024/09/16 00:45:20 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
-
-static	char	*calc(char const *s, char *s2, unsigned int start, size_t len);
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*s2;
-
-	s2 = 0;
-	if (s == 0)
-		return (0);
-	if (start >= ft_strlen(s))
-	{
-		s2 = (char *) malloc(sizeof(char) * 1);
-		if (s2 == NULL)
-			return (NULL);
-		*(s2) = '\0';
-		return (s2);
-	}
-	return (calc(s, s2, start, len));
-}
 
 static	char	*calc(char const *s, char *s2, unsigned int start, size_t len)
 {
@@ -54,4 +34,22 @@ static	char	*calc(char const *s, char *s2, unsigned int start, size_t len)
 	}
 	*(s2 + j) = '\0';
 	return (s2);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*s2;
+
+	s2 = 0;
+	if (s == 0)
+		return (0);
+	if (start >= ft_strlen(s))
+	{
+		s2 = (char *) malloc(sizeof(char) * 1);
+		if (s2 == NULL)
+			return (NULL);
+		*(s2) = '\0';
+		return (s2);
+	}
+	return (calc(s, s2, start, len));
 }
