@@ -194,6 +194,9 @@ void	ft_free_array_of_array(void ***array);
 
 size_t	ft_get_array_length(void **array);
 
+size_t	ft_strnlen(const char *s,
+			const size_t maxlen);
+
 /** GNL definitions */
 char	*get_next_line(int fd);
 
