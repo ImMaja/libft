@@ -52,6 +52,7 @@ SRCS = $(SRCS_DIR)$(LIBFT)ft_isalpha.c \
 		$(SRCS_DIR)$(LIBFT)ft_free_array.c \
 		$(SRCS_DIR)$(LIBFT)ft_free_array_of_array.c \
 		$(SRCS_DIR)$(LIBFT)ft_get_array_length.c \
+		$(SRCS_DIR)$(LIBFT)ft_strnlen.c \
 		\
 		$(SRCS_DIR)$(FT_PRINTF)ft_printf.c \
 		$(SRCS_DIR)$(FT_PRINTF)base_utils.c \
