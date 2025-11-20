@@ -6,7 +6,7 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2024/05/16 14:06:43 by maja             ###   ########.fr       */
+/*   Updated: 2025/11/20 15:07:22 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,9 @@ size_t	ft_get_array_length(void **array);
 
 size_t	ft_strnlen(const char *s,
 			const size_t maxlen);
+
+bool	ft_str_has_exactly(const char *s,
+			const size_t len);
 
 /** GNL definitions */
 char	*get_next_line(int fd);
