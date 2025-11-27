@@ -6,7 +6,7 @@
 /*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:55:53 by gpeiffer          #+#    #+#             */
-/*   Updated: 2025/11/28 00:11:19 by maja             ###   ########.fr       */
+/*   Updated: 2025/11/28 00:12:47 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,9 +200,8 @@ size_t	ft_strnlen(const char *s,
 bool	ft_str_has_exactly(const char *s,
 			const size_t len);
 
-int		ft_strncmp(const char *s1,
-			const char *s2,
-			size_t n);
+int		ft_strcmp(const char *s1,
+			const char *s2);
 
 /** GNL definitions */
 char	*get_next_line(int fd);
