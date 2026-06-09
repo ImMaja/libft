@@ -17,5 +17,5 @@ size_t	ft_strnlen(const char *s, const size_t maxlen) {
 		return (0);
 
 	const char	*found = ft_memchr(s, '\0', maxlen);
-	return (found ? found - s : maxlen);
+	return ( found ? (size_t) (found - s) : (maxlen) );
 }
